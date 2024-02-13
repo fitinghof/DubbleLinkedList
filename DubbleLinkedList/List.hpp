@@ -19,14 +19,17 @@ private:
 		
 public:
 	List(std::vector<int> elements = {});
+	List(List& other);
 	~List();
+
 
 	void insert(int value);
 	void insert(std::vector<int> elements);
 	void remove(int index);
-
 	void showAll() const;
-	int operator[](int index) const;
+
+	List& operator=(List& other);
+	int& operator[](int index) const;
 	int getNumberOf() const;
 };
 
