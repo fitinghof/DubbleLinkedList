@@ -59,7 +59,7 @@ void List::remove(int index)
 	Node* currentNode = first;
 	for (int i = 0; i < index; i++)
 	{
-		if (currentNode == nullptr) return;
+		if (currentNode->next == nullptr) break;
 		currentNode = currentNode->next;
 	}
 	if (currentNode != first && currentNode != last) {

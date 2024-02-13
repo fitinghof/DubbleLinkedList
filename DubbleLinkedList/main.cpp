@@ -13,6 +13,9 @@ int main() {
 	b.insert(11);
 	b.remove(0);
 	b.remove(0);
+	b.remove(6);
+	b.remove(5);
+	b.remove(2);
 	b.showAll();
 	std::cout << b[0] << "\n";
 	std::cout << b[5] << "\n\n";
