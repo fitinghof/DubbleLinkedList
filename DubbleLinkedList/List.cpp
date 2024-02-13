@@ -39,23 +39,26 @@ List::List(std::vector<int> elements)
 	}
 }
 
-/*Copies other List object and creates a new List, if killother it moves other list to new list*/
-List::List(List& other, bool killother)
+/*Copies other List object and creates a new List*/
+List::List(List& other)
 {
 	Node* otherCurrentNode = other.first;
-	if (killother) {
-		this->first = other.first;
-		this->last = other.last;
-		other.first = nullptr;
-		other.last = nullptr;
-	}
-	else
 	{
 		while (otherCurrentNode != nullptr) {
 			insert(otherCurrentNode->value);
 			otherCurrentNode = otherCurrentNode->next;
 		}
 	}
+}
+
+/*creates a new list and moves others items into this list, leaves other list empty*/
+List::List(List&& other)
+{
+	this->first = other.first;
+	this->last = other.last;
+
+	this->first = nullptr;
+	this->last = nullptr;
 }
 
 /*Destructor*/
@@ -153,6 +156,17 @@ List& List::operator=(List& other)
 		}
 	}
 	return *this;
+}
+
+/*moves other list to this list, leaves other list empty*/
+List& List::operator=(List&& other)
+{
+	freeMemory();
+
+	this->first = other.first;
+	this->last = other.last;
+	other.last = nullptr;
+	other.first = nullptr;
 }
 
 /*Returns reference value at place index*/
