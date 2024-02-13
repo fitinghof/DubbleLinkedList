@@ -16,6 +16,7 @@ private:
 	Node* last;
 
 	void insert(int value, Node* currentNode);
+	void freeMemory();
 		
 public:
 	List(std::vector<int> elements = {});

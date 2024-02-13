@@ -1,6 +1,6 @@
 #include "List.hpp"
 
-
+/*Insert func for recursivly going through the nodes until the value added is less than the next value, should not be used directly for inserting values*/
 void List::insert(int value, Node* currentNode)
 {
 	if (currentNode == nullptr) {
@@ -20,6 +20,18 @@ void List::insert(int value, Node* currentNode)
 	return insert(value, currentNode->next);
 }
 
+/*Whipes the list*/
+void List::freeMemory()
+{
+	Node* next = first;
+	while (first != nullptr) {
+		next = first->next;
+		delete first;
+		first = next;
+	}
+}
+
+/*Creates a list with the elements in the vector*/
 List::List(std::vector<int> elements)
 {
 	for (int i : elements) {
@@ -27,6 +39,7 @@ List::List(std::vector<int> elements)
 	}
 }
 
+/*Copies other List object and creates a new List, if killother it moves other list to new list*/
 List::List(List& other, bool killother)
 {
 	Node* otherCurrentNode = other.first;
@@ -45,16 +58,13 @@ List::List(List& other, bool killother)
 	}
 }
 
+/*Destructor*/
 List::~List()
 {
-	Node* next = first;
-	while (first != nullptr) {
-		next = first->next;
-		delete first;
-		first = next;
-	}
+	freeMemory();
 }
 
+/*Inserts value in order of size*/
 void List::insert(int value)
 {
 	if (first == nullptr) {
@@ -64,6 +74,7 @@ void List::insert(int value)
 	else insert(value, first);
 }
 
+/*Inserts multiple values in order of size*/
 void List::insert(std::vector<int> elements)
 {
 	for (int i : elements) {
@@ -71,6 +82,7 @@ void List::insert(std::vector<int> elements)
 	}
 }
 
+/*Removes value at index*/
 void List::remove(int index)
 {
 	if (first == nullptr) return;
@@ -96,6 +108,7 @@ void List::remove(int index)
 	delete currentNode;
 }
 
+/*Prints out all values*/
 void List::showAll() const 
 {
 	Node* currentNode = first;
@@ -109,6 +122,7 @@ void List::showAll() const
 	std::cout << list + "\n";
 }
 
+/*Moves list from other list to this list, other list becomes empty*/
 List& List::move(List& other)
 {
 	Node* next = first;
@@ -126,15 +140,11 @@ List& List::move(List& other)
 	return *this;
 }
 
+/*Overwrites this list to match other list*/
 List& List::operator=(List& other)
 {
 	if (this != &other) {
-		Node* next = first;
-		while (first != nullptr) {
-			next = first->next;
-			delete first;
-			first = next;
-		}
+		freeMemory();
 
 		Node* otherCurrentNode = other.first;
 		while (otherCurrentNode != nullptr) {
@@ -145,6 +155,7 @@ List& List::operator=(List& other)
 	return *this;
 }
 
+/*Returns reference value at place index*/
 int& List::operator[](int index) const
 {
 	Node* currentNode = first;
@@ -156,6 +167,7 @@ int& List::operator[](int index) const
 	return currentNode->value;
 }
 
+/*Returns number of elements in the list*/
 int List::getNumberOf() const
 {
 	int nrOf = 0;
