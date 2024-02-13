@@ -19,7 +19,8 @@ private:
 		
 public:
 	List(std::vector<int> elements = {});
-	List(List& other);
+	List(List& other, bool killother);
+
 	~List();
 
 
@@ -28,6 +29,7 @@ public:
 	void remove(int index);
 	void showAll() const;
 
+	List& move(List& other);
 	List& operator=(List& other);
 	int& operator[](int index) const;
 	int getNumberOf() const;

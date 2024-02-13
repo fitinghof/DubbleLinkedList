@@ -27,12 +27,21 @@ List::List(std::vector<int> elements)
 	}
 }
 
-List::List(List& other)
+List::List(List& other, bool killother)
 {
 	Node* otherCurrentNode = other.first;
-	while (otherCurrentNode != nullptr) {
-		insert(otherCurrentNode->value);
-		otherCurrentNode = otherCurrentNode->next;
+	if (killother) {
+		this->first = other.first;
+		this->last = other.last;
+		other.first = nullptr;
+		other.last = nullptr;
+	}
+	else
+	{
+		while (otherCurrentNode != nullptr) {
+			insert(otherCurrentNode->value);
+			otherCurrentNode = otherCurrentNode->next;
+		}
 	}
 }
 
@@ -71,6 +80,7 @@ void List::remove(int index)
 		if (currentNode->next == nullptr) break;
 		currentNode = currentNode->next;
 	}
+
 	if (currentNode != first && currentNode != last) {
 		currentNode->next->previous = currentNode->previous;
 		currentNode->previous->next = currentNode->next;
@@ -97,6 +107,23 @@ void List::showAll() const
 	}
 	list += "}";
 	std::cout << list + "\n";
+}
+
+List& List::move(List& other)
+{
+	Node* next = first;
+	while (first != nullptr) {
+		next = first->next;
+		delete first;
+		first = next;
+	}
+
+	this->first = other.first;
+	this->last = other.last;
+	other.last = nullptr;
+	other.first = nullptr;
+
+	return *this;
 }
 
 List& List::operator=(List& other)
