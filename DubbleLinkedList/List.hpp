@@ -21,7 +21,7 @@ private:
 public:
 	List(std::vector<int> elements = {});
 	List(List& other);
-	List(List&& other);
+	List(List&& other) noexcept;
 
 	~List();
 
@@ -33,7 +33,7 @@ public:
 
 	List& move(List& other);
 	List& operator=(List& other);
-	List& operator=(List&& other);
+	List& operator=(List&& other) noexcept;
 	int& operator[](int index) const;
 	int getNumberOf() const;
 };

@@ -52,7 +52,7 @@ List::List(List& other)
 }
 
 /*creates a new list and moves others items into this list, leaves other list empty*/
-List::List(List&& other)
+List::List(List&& other) noexcept
 {
 	this->first = other.first;
 	this->last = other.last;
@@ -159,7 +159,7 @@ List& List::operator=(List& other)
 }
 
 /*moves other list to this list, leaves other list empty*/
-List& List::operator=(List&& other)
+List& List::operator=(List&& other) noexcept
 {
 	freeMemory();
 
@@ -167,6 +167,8 @@ List& List::operator=(List&& other)
 	this->last = other.last;
 	other.last = nullptr;
 	other.first = nullptr;
+
+	return *this;
 }
 
 /*Returns reference value at place index*/
