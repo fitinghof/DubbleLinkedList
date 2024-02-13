@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <cassert>
 class List
 {
 private:
@@ -22,9 +23,7 @@ public:
 	List(std::vector<int> elements = {});
 	List(List& other);
 	List(List&& other) noexcept;
-
 	~List();
-
 
 	void insert(int value);
 	void insert(std::vector<int> elements);

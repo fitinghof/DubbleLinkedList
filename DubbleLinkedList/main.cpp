@@ -12,6 +12,7 @@ int main() {
 	b.insert(-1);
 	b.insert(11);
 	b.showAll();
+	a.remove(22);
 	std::cout << b[0] << "\n";
-	std::cout << b[5] << "\n\n";
+	std::cout << b[22] << "\n\n";
 }

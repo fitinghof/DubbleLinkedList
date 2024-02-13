@@ -88,11 +88,12 @@ void List::insert(std::vector<int> elements)
 /*Removes value at index*/
 void List::remove(int index)
 {
-	if (first == nullptr) return;
+	assert(first != nullptr && "The list is empty");
+
 	Node* currentNode = first;
 	for (int i = 0; i < index; i++)
 	{
-		if (currentNode->next == nullptr) break;
+		assert(currentNode->next != nullptr && "Attempted to remove nonexisting element out of range");
 		currentNode = currentNode->next;
 	}
 
@@ -174,10 +175,12 @@ List& List::operator=(List&& other) noexcept
 /*Returns reference value at place index*/
 int& List::operator[](int index) const
 {
+	assert(first != nullptr && "The list is empty");
+
 	Node* currentNode = first;
 	for (int i = 0; i < index; i++)
 	{
-		if (currentNode->next == nullptr) return currentNode->value;
+		assert(currentNode->next != nullptr && "Attempted to access element out of range");
 		currentNode = currentNode->next;
 	}
 	return currentNode->value;
