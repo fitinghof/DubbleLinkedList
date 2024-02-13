@@ -19,7 +19,7 @@ private:
 		
 public:
 	List(std::vector<int> elements = {});
-	List(List& other, bool killother);
+	List(List& other, bool killother = 0);
 
 	~List();
 
