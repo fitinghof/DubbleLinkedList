@@ -62,8 +62,18 @@ void List::remove(int index)
 		if (currentNode == nullptr) return;
 		currentNode = currentNode->next;
 	}
-	if(currentNode->next != nullptr) currentNode->next->previous = currentNode->previous;
-	if (currentNode->previous != nullptr) currentNode->previous->next = currentNode->next;
+	if (currentNode != first && currentNode != last) {
+		currentNode->next->previous = currentNode->previous;
+		currentNode->previous->next = currentNode->next;
+	}
+	if (currentNode == first) {
+		if (currentNode->next != nullptr) currentNode->next->previous = nullptr;
+		first = currentNode->next;
+	}
+	if (currentNode == last) {
+		if(currentNode->previous != nullptr) currentNode->previous->next = nullptr;
+		last = currentNode->previous;
+	}
 	delete currentNode;
 }
 
